@@ -17,8 +17,11 @@ import time
 import copy
 import traceback
 
+<<<<<<< HEAD
 from bot import Bot
 
+=======
+>>>>>>> d638f33838e828a2c5af31598eb09927df58239c
 TIME = 24
 MAX_PTS = 86
 
@@ -50,7 +53,11 @@ class Manual_Player:
 
 class BigBoard:
 
+<<<<<<< HEAD
 	def __init__(self):
+=======
+	def __init__(self):	
+>>>>>>> d638f33838e828a2c5af31598eb09927df58239c
 		# big_boards_status is the game board
 		# small_boards_status shows which small_boards have been won/drawn and by which player
 		self.big_boards_status = ([['-' for i in range(9)] for j in range(9)], [['-' for i in range(9)] for j in range(9)])
@@ -358,8 +365,11 @@ if __name__ == '__main__':
 		print '<option> can be 1 => Random player vs. Random player'
 		print '                2 => Human vs. Random Player'
 		print '                3 => Human vs. Human'
+<<<<<<< HEAD
 		print '                4 => Bot vs Random player'
 		print '                5 => Bot vs Bot'
+=======
+>>>>>>> d638f33838e828a2c5af31598eb09927df58239c
 		sys.exit(1)
  
 	obj1 = ''
@@ -375,12 +385,15 @@ if __name__ == '__main__':
 	elif option == '3':
 		obj1 = Manual_Player()
 		obj2 = Manual_Player()
+<<<<<<< HEAD
 	elif option == '4':
 		obj1 = Bot()
 		obj2 = Random_Player()
 	elif option == '5':
 		obj1 = Bot()
 		obj2 = Bot()
+=======
+>>>>>>> d638f33838e828a2c5af31598eb09927df58239c
 	else:
 		print 'Invalid option'
 		sys.exit(1)
