@@ -156,11 +156,14 @@ class Bot:
         if (self.big_board1Hash, flag) in self.big_board1hueristic:
             self.big_board1_score = self.big_board1hueristic[(self.big_board1Hash, flag)]
         big_board1_score = self.big_board_heuristic(flag, sb1, 1)
+        self.big_board1hueristic[(self.big_board1Hash,flag)] = big_board1_score
 
         #cal bigboard2 score
         if (self.big_board2Hash, flag) in self.big_board2hueristic:
             self.big_board2_score = self.big_board2hueristic[(self.big_board2Hash, flag)]
         big_board2_score = self.big_board_heuristic(flag, sb2, 2)
+        self.big_board2hueristic[(self.big_board2Hash, flag)] = big_board2_score
+
 
         total = big_board1_score + big_board2_score
         
@@ -172,8 +175,8 @@ class Bot:
     def hash_init(self):
         # Every (position,player) pair is given a random bit-string
         for l in xrange (2):
-            for i in xrange(16):
-                for j in xrange(16):
+            for i in xrange(9):
+                for j in xrange(9):
                     for k in xrange(2):
                         self.randTable[l][i][j][k] = long(random.randint(1, 2 ** 64))
                     
@@ -210,7 +213,7 @@ class Bot:
         isMax = (flag == self.who)
         
         if isMax:
-            maxVal = float("inf")
+            maxVal = float("-inf")
             maxInd = 0
             for i in xrange(len(validCells)):
                 cell = validCells[i]
@@ -225,8 +228,8 @@ class Bot:
                 if maxVal > alpha:
                     alpha = maxVal
 
-                board.big_boards_status[cell[0]][cell[1]][cell[2]] = 'l'
-                board.small_boards_status[cell[0]][cell[1] / 3][cell[2] / 3] = 'l'
+                board.big_boards_status[cell[0]][cell[1]][cell[2]] = '-'
+                board.small_boards_status[cell[0]][cell[1] / 3][cell[2] / 3] = '-'
 
                 self.addMovetoHash(cell, 1)
                 if beta <= alpha:
@@ -248,8 +251,8 @@ class Bot:
                 if minVal < beta:
                     beta = minVal
                 
-                board.big_boards_status[cell[0]][cell[1]][cell[2]] = 'l'
-                board.small_boards_status[cell[0]][cell[1 / 3]][cell[2 / 3]] = 'l'
+                board.big_boards_status[cell[0]][cell[1]][cell[2]] = '-'
+                board.small_boards_status[cell[0]][cell[1 / 3]][cell[2 / 3]] = '-'
                 
                 self.addMovetoHash(cell, 0)
                 
@@ -289,7 +292,7 @@ class Bot:
                 self.smallboard1HashSafeCopy = deepcopy(self.small_board1Hash)
                 self.smallboard2HashSafeCopy = deepcopy(self.small_board2Hash)
                 b = deepcopy(board)
-                move = self.minimax(b, flag, 0, maxDepth, float("-inf"), float("-inf"), old_move)[1]
+                move = self.minimax(b, flag, 0, maxDepth, float("-inf"), float("inf"), old_move)[1]
                 bestMove = move
                 maxDepth += 1
                 del b
