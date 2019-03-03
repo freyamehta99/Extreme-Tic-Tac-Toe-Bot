@@ -19,7 +19,7 @@ import traceback
 
 from bot import Bot
 
-TIME = 24
+TIME = 30
 MAX_PTS = 86
 
 class TimedOutExc(Exception):
